@@ -1,0 +1,21 @@
+services:
+  omd:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: omd-app
+    restart: unless-stopped
+    ports:
+      - "${PORT:-3000}:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+    volumes:
+      # Mount md directory so documentation updates are reflected in real-time
+      - ./md:/app/md:ro
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 5s

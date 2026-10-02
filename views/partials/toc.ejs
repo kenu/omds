@@ -1,0 +1,14 @@
+<% if (typeof rendered !== 'undefined' && rendered.toc && rendered.toc.length > 0) { %>
+<aside class="app-toc" id="app-toc">
+  <div class="toc-title">On this page</div>
+  <ul class="toc-list">
+    <% rendered.toc.forEach(item => { %>
+      <li class="toc-item level-<%= item.level %>">
+        <a href="#<%= item.id %>" class="toc-link">
+          <%= item.title %>
+        </a>
+      </li>
+    <% }); %>
+  </ul>
+</aside>
+<% } %>

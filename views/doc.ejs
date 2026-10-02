@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= pageTitle %></title>
+  <meta name="description" content="<%= rendered.title %> - Technical guide and reference from OKdevTV." />
+  <link rel="icon" type="image/webp" href="/images/logo.webp">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/hljs-github.css">
+</head>
+<body>
+  <%- include('partials/header') %>
+
+  <div class="app-container">
+    <%- include('partials/sidebar', { categories, currentCategory, currentSlug }) %>
+
+    <main class="app-main">
+      <div class="content-wrapper">
+        <!-- Breadcrumbs -->
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="/">Home</a>
+          <span>/</span>
+          <a href="/<%= doc.category %>"><%= doc.category %></a>
+          <span>/</span>
+          <span style="color:var(--text-primary)"><%= doc.basename %></span>
+        </nav>
+
+        <!-- Document Metadata Header -->
+        <div class="doc-meta">
+          <span class="meta-badge">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+            </svg>
+            <%= doc.category %>
+          </span>
+
+          <span class="meta-badge">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            <%= rendered.readingTimeMin %> min read
+          </span>
+
+          <span class="meta-badge">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+            </svg>
+            <%= (doc.size / 1024).toFixed(1) %> KB
+          </span>
+
+          <a href="?raw=1" target="_blank" class="meta-badge" title="View Raw Markdown" style="margin-left:auto; text-decoration:none;">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+              <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+            Raw Markdown
+          </a>
+        </div>
+
+        <!-- Rendered HTML Content -->
+        <article class="markdown-body">
+          <%- rendered.html %>
+        </article>
+
+        <!-- Adjacent Pagination -->
+        <% if (adjacent.prev || adjacent.next) { %>
+          <div class="doc-pagination">
+            <% if (adjacent.prev) { %>
+              <a href="<%= adjacent.prev.url %>" class="pagination-card prev">
+                <span class="pagination-label">&larr; Previous</span>
+                <span class="pagination-title"><%= adjacent.prev.title %></span>
+              </a>
+            <% } %>
+
+            <% if (adjacent.next) { %>
+              <a href="<%= adjacent.next.url %>" class="pagination-card next">
+                <span class="pagination-label">Next &rarr;</span>
+                <span class="pagination-title"><%= adjacent.next.title %></span>
+              </a>
+            <% } %>
+          </div>
+        <% } %>
+      </div>
+    </main>
+
+    <%- include('partials/toc', { rendered }) %>
+  </div>
+
+  <%- include('partials/footer') %>
+
+  <script src="/js/main.js"></script>
+</body>
+</html>

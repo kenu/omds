@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= pageTitle %></title>
+  <meta name="description" content="OKdevTV Markdown Documentation Archive - Over <%= totalDocs %> developer guides, cheat sheets, and technical notes rendered in HTML with Node.js LTS and EJS." />
+  <link rel="icon" type="image/webp" href="/images/logo.webp">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/hljs-github.css">
+</head>
+<body>
+  <%- include('partials/header') %>
+
+  <div class="app-container">
+    <%- include('partials/sidebar', { categories, currentCategory: null, currentSlug: null }) %>
+
+    <main class="app-main">
+      <div class="content-wrapper">
+        <section class="hero-section">
+          <div class="hero-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+            </svg>
+            <span>Node.js LTS &bull; Express &bull; EJS &bull; Docker Compose</span>
+          </div>
+          <h1 class="hero-title">OKdevTV Markdown Docs</h1>
+          <p class="hero-desc">
+            A comprehensive developer knowledge base featuring <strong><%= totalDocs %></strong> guides and cheat sheets across <strong><%= totalCategories %></strong> technical topics, beautifully rendered from Markdown to HTML.
+          </p>
+
+          <div class="hero-stats">
+            <div class="stat-item">
+              <span class="stat-num"><%= totalDocs %></span>
+              <span class="stat-label">Markdown Guides</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-num"><%= totalCategories %></span>
+              <span class="stat-label">Categories</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-num">100%</span>
+              <span class="stat-label">Server Rendered</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Featured Topics Grid -->
+        <h2 class="section-title">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--accent-primary)">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+          </svg>
+          Popular & Featured Categories
+        </h2>
+
+        <div class="cards-grid">
+          <% featuredCategories.forEach(cat => { %>
+            <a href="<%= cat.docs[0] ? cat.docs[0].url : '#' %>" class="feature-card">
+              <div>
+                <div class="card-top">
+                  <span class="card-cat-title"><%= cat.title %></span>
+                  <span class="card-badge"><%= cat.docs.length %> docs</span>
+                </div>
+                <ul class="card-preview-list">
+                  <% cat.docs.slice(0, 3).forEach(d => { %>
+                    <li>&bull; <%= d.title %></li>
+                  <% }); %>
+                </ul>
+              </div>
+            </a>
+          <% }); %>
+        </div>
+
+        <!-- All Categories Directory -->
+        <h2 class="section-title">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--accent-primary)">
+            <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+          </svg>
+          All Topics Directory (<%= totalCategories %>)
+        </h2>
+
+        <div class="all-cats-container">
+          <% categories.forEach(cat => { %>
+            <a href="<%= cat.docs[0] ? cat.docs[0].url : '#' %>" class="cat-pill">
+              <span><%= cat.title %></span>
+              <span class="category-count"><%= cat.docs.length %></span>
+            </a>
+          <% }); %>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <%- include('partials/footer') %>
+
+  <script src="/js/main.js"></script>
+</body>
+</html>

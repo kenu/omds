@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= pageTitle %></title>
+  <link rel="icon" type="image/webp" href="/images/logo.webp">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <%- include('partials/header') %>
+
+  <div class="app-container">
+    <%- include('partials/sidebar', { categories, currentCategory: null, currentSlug: null }) %>
+
+    <main class="app-main" style="align-items:center;">
+      <div class="content-wrapper" style="text-align:center; padding: 4rem 1rem;">
+        <h1 style="font-size: 5rem; font-weight: 800; color: var(--accent-primary); line-height: 1; margin-bottom: 1rem;">404</h1>
+        <h2 style="font-size: 1.85rem; margin-bottom: 1rem;">Document Not Found</h2>
+        <p style="color: var(--text-secondary); max-width: 500px; margin: 0 auto 2rem; font-size: 1.05rem;">
+          <% if (typeof message !== 'undefined') { %>
+            <%= message %>
+          <% } else { %>
+            The markdown file or topic you requested could not be found. Try searching or browse one of our 210+ categories in the sidebar.
+          <% } %>
+        </p>
+
+        <div style="display: flex; gap: 1rem; justify-content: center;">
+          <a href="/" class="header-btn" style="padding: 0.65rem 1.25rem; font-size: 0.95rem; background: var(--accent-primary); color: #fff; border:none;">
+            Return Home
+          </a>
+          <button onclick="document.getElementById('search-trigger-btn').click()" class="header-btn" style="padding: 0.65rem 1.25rem; font-size: 0.95rem;">
+            Open Search (⌘K)
+          </button>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <%- include('partials/footer') %>
+
+  <script src="/js/main.js"></script>
+</body>
+</html>

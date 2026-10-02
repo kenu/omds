@@ -1,0 +1,50 @@
+<!-- Sidebar backdrop for mobile -->
+<div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+
+<aside class="app-sidebar" id="app-sidebar">
+  <div class="sidebar-header">
+    <input
+      type="text"
+      id="sidebar-filter"
+      class="sidebar-filter-input"
+      placeholder="Filter <%= categories.length %> categories..."
+      autocomplete="off"
+    />
+  </div>
+
+  <nav class="sidebar-nav">
+    <% categories.forEach(cat => { %>
+      <% 
+        const isCurrentCat = typeof currentCategory !== 'undefined' && currentCategory === cat.name;
+        // Keep current category open, others open if currentCat matches or by default
+        const isCollapsed = !isCurrentCat;
+      %>
+      <div class="nav-category <%= isCollapsed ? 'collapsed' : '' %>" data-category="<%= cat.name.toLowerCase() %>">
+        <button type="button" class="category-header">
+          <span class="category-title">
+            <svg class="category-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+            <%= cat.title %>
+          </span>
+          <span class="category-count"><%= cat.docs.length %></span>
+        </button>
+
+        <ul class="category-docs">
+          <% cat.docs.forEach(d => { %>
+            <% const isActive = typeof currentSlug !== 'undefined' && currentSlug === d.slug; %>
+            <li>
+              <a
+                href="<%= d.url %>"
+                class="doc-link <%= isActive ? 'active' : '' %>"
+                title="<%= d.title %>"
+              >
+                <%= d.title %>
+              </a>
+            </li>
+          <% }); %>
+        </ul>
+      </div>
+    <% }); %>
+  </nav>
+</aside>

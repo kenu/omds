@@ -1,0 +1,90 @@
+<header class="app-header">
+  <div class="header-left">
+    <button class="menu-toggle-btn" id="menu-toggle-btn" aria-label="Toggle navigation menu">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+    </button>
+    
+    <a href="/" class="brand-link">
+      <img src="/images/logo.webp" alt="OKdevTV Logo" class="brand-logo" onerror="this.style.display='none'" />
+      <span>OKdevTV</span>
+      <span class="brand-badge">Docs</span>
+    </a>
+  </div>
+
+  <div class="header-center">
+    <button class="search-trigger-btn" id="search-trigger-btn" type="button" aria-label="Search documentation">
+      <div class="search-trigger-left">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <span>Search documentation...</span>
+      </div>
+      <span class="kbd-shortcut">⌘K / /</span>
+    </button>
+  </div>
+
+  <div class="header-right">
+    <a href="/" class="header-btn" title="Home">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+      </svg>
+      <span>Home</span>
+    </a>
+
+    <a href="https://okdevtv.com" target="_blank" rel="noopener noreferrer" class="header-btn" title="OKdevTV Website">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="10"></circle>
+        <line x1="2" y1="12" x2="22" y2="12"></line>
+        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+      </svg>
+      <span>OKdevTV</span>
+    </a>
+
+    <button class="header-btn" id="theme-toggle-btn" aria-label="Toggle theme">
+      <!-- Sun icon (for dark mode, switches to light) -->
+      <svg id="sun-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="5"></circle>
+        <line x1="12" y1="1" x2="12" y2="3"></line>
+        <line x1="12" y1="21" x2="12" y2="23"></line>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+        <line x1="1" y1="12" x2="3" y2="12"></line>
+        <line x1="21" y1="12" x2="23" y2="12"></line>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+      </svg>
+      <!-- Moon icon (for light mode, switches to dark) -->
+      <svg id="moon-icon" style="display:none;" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<!-- Search Modal Backdrop -->
+<div class="search-modal-backdrop" id="search-modal-backdrop">
+  <div class="search-modal">
+    <div class="search-input-wrapper">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--text-muted)">
+        <circle cx="11" cy="11" r="8"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+      <input type="text" id="search-modal-input" class="search-modal-input" placeholder="Search guides, notes, commands..." autocomplete="off" />
+      <span class="kbd-shortcut">ESC</span>
+    </div>
+    <ul class="search-results-list" id="search-results-list">
+      <!-- Search results injected here -->
+    </ul>
+    <div class="search-footer">
+      <span><strong style="color:var(--text-primary)">↑↓</strong> to navigate</span>
+      <span><strong style="color:var(--text-primary)">↵</strong> to select</span>
+      <span><strong style="color:var(--text-primary)">ESC</strong> to close</span>
+    </div>
+  </div>
+</div>
