@@ -60,6 +60,37 @@
           </a>
         </div>
 
+        <!-- Mobile "On this page" TOC dropdown -->
+        <% if (rendered.toc && rendered.toc.length > 0) { %>
+          <details class="mobile-toc-dropdown">
+            <summary class="mobile-toc-summary">
+              <span class="mobile-toc-summary-text">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="8" y1="6" x2="21" y2="6"></line>
+                  <line x1="8" y1="12" x2="21" y2="12"></line>
+                  <line x1="8" y1="18" x2="21" y2="18"></line>
+                  <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                  <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                  <line x1="3" y1="18" x2="3.01" y2="18"></line>
+                </svg>
+                <span>On this page (<%= rendered.toc.length %>)</span>
+              </span>
+              <svg class="mobile-toc-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </summary>
+            <ul class="mobile-toc-list">
+              <% rendered.toc.forEach(item => { %>
+                <li class="mobile-toc-item level-<%= item.level %>">
+                  <a href="#<%= item.id %>" onclick="this.closest('details').removeAttribute('open')">
+                    <%= item.title %>
+                  </a>
+                </li>
+              <% }); %>
+            </ul>
+          </details>
+        <% } %>
+
         <!-- Rendered HTML Content -->
         <article class="markdown-body">
           <%- rendered.html %>

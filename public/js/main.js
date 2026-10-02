@@ -50,19 +50,57 @@ function updateThemeIcon(theme) {
 function initSidebar() {
   const sidebar = document.getElementById('app-sidebar');
   const toggleBtn = document.getElementById('menu-toggle-btn');
+  const closeBtn = document.getElementById('sidebar-close-btn');
   const backdrop = document.getElementById('sidebar-backdrop');
 
-  if (toggleBtn && sidebar && backdrop) {
-    toggleBtn.addEventListener('click', () => {
-      sidebar.classList.toggle('open');
-      backdrop.classList.toggle('open');
-    });
+  function openSidebar() {
+    if (!sidebar || !backdrop) return;
+    sidebar.classList.add('open');
+    backdrop.classList.add('open');
+    document.body.classList.add('sidebar-open');
+  }
 
-    backdrop.addEventListener('click', () => {
-      sidebar.classList.remove('open');
-      backdrop.classList.remove('open');
+  function closeSidebar() {
+    if (!sidebar || !backdrop) return;
+    sidebar.classList.remove('open');
+    backdrop.classList.remove('open');
+    document.body.classList.remove('sidebar-open');
+  }
+
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', () => {
+      if (sidebar.classList.contains('open')) {
+        closeSidebar();
+      } else {
+        openSidebar();
+      }
     });
   }
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', closeSidebar);
+  }
+
+  if (backdrop) {
+    backdrop.addEventListener('click', closeSidebar);
+  }
+
+  // Close sidebar on escape key if open
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && sidebar && sidebar.classList.contains('open')) {
+      closeSidebar();
+    }
+  });
+
+  // Auto-close sidebar on mobile when a document link is clicked
+  const docLinks = document.querySelectorAll('.doc-link');
+  docLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 860) {
+        closeSidebar();
+      }
+    });
+  });
 
   // Category Collapsible Folders
   const categoryHeaders = document.querySelectorAll('.category-header');

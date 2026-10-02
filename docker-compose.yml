@@ -11,8 +11,12 @@ services:
       - NODE_ENV=production
       - PORT=3000
     volumes:
-      # Mount md directory so documentation updates are reflected in real-time
+      # Mount directories so updates are reflected in real-time
       - ./md:/app/md:ro
+      - ./views:/app/views:ro
+      - ./public:/app/public:ro
+      - ./lib:/app/lib:ro
+      - ./server.js:/app/server.js:ro
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
       interval: 30s
