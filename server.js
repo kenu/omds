@@ -2,6 +2,7 @@ const express = require('express');
 const compression = require('compression');
 const path = require('path');
 const fs = require('fs');
+const { lottoHandler } = require('./lib/645');
 
 const {
   getAllDocs,
@@ -41,6 +42,8 @@ function resolveAssetPath(filePath) {
 
   return null;
 }
+
+app.get('/645', lottoHandler)
 
 // Health check endpoint for Docker / orchestration
 app.get('/health', (req, res) => {
@@ -117,12 +120,19 @@ app.get('/', (req, res) => {
 // Document or Asset Viewer: catch-all
 app.get('*', (req, res) => {
   const reqPath = decodeURIComponent(req.path).replace(/^\/+/, '');
-  
+
   if (!reqPath) {
     return res.redirect('/');
   }
 
   // 1. Check if this is an asset request within a category (e.g. /elk/images/elastic-stack.webp)
+  let resolvePath = reqPath.replace('mib/', '');
+  if (resolvePath.split('/').length === 1) {
+    resolvePath += '/' + resolvePath;
+  }
+  if (reqPath !== resolvePath) {
+    return res.redirect(302, '/' + resolvePath);
+  }
   const assetResolved = resolveAssetPath(reqPath);
   if (assetResolved && !reqPath.endsWith('.md')) {
     return res.sendFile(assetResolved);
