@@ -5,6 +5,7 @@ services:
       dockerfile: Dockerfile
     container_name: omd-app
     restart: unless-stopped
+    image: omds-app:latest
     ports:
       - "${PORT:-3000}:3000"
     environment:

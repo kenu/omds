@@ -127,6 +127,7 @@ app.get('*', (req, res) => {
 
   // 1. Check if this is an asset request within a category (e.g. /elk/images/elastic-stack.webp)
   let resolvePath = reqPath.replace('mib/', '');
+  resolvePath = resolvePath.replace('md/', '');
   if (resolvePath.split('/').length === 1) {
     resolvePath += '/' + resolvePath;
   }
